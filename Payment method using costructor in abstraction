@@ -1,0 +1,62 @@
+from abc import ABC, abstractmethod
+
+class PaymentMethod(ABC):
+    def __init__(self, amount: float):
+        self.amount = amount  
+
+    @abstractmethod
+    def process_payment(self):
+        pass
+
+class CardPayment(PaymentMethod):
+    def __init__(self, amount: float):
+        super().__init__(amount)  
+
+    def process_payment(self):
+        print(f"Processing Card payment of amount: ₹{self.amount}")
+
+class UPIPayment(PaymentMethod):
+    def __init__(self, amount: float):
+        super().__init__(amount)  
+
+    def process_payment(self):
+        print(f"Processing UPI payment of amount: ₹{self.amount}")
+
+class NetBankingPayment(PaymentMethod):
+    def __init__(self, amount: float):
+        super().__init__(amount)  
+
+    def process_payment(self):
+        print(f"Processing Net Banking payment of amount: ₹{self.amount}")
+
+class CashPayment(PaymentMethod):
+    def __init__(self, amount: float):
+        super().__init__(amount)  
+
+    def process_payment(self):
+        print(f"Processing Cash payment of amount: ₹{self.amount}")
+
+class PaymentProcessor:
+    def process_payment(self, payment_method: PaymentMethod):
+        payment_method.process_payment()
+
+
+if __name__ == "__main__":
+    processor = PaymentProcessor()
+
+    card_payment = CardPayment(1000.0)
+    upi_payment = UPIPayment(500.0)
+    net_banking_payment = NetBankingPayment(1500.0)
+    cash_payment = CashPayment(200.0)
+
+    print("==== Card Payment ====")
+    processor.process_payment(card_payment)
+
+    print("==== UPI Payment ====")
+    processor.process_payment(upi_payment)
+
+    print("==== Net Banking Payment ====")
+    processor.process_payment(net_banking_payment)
+
+    print("==== Cash Payment ====")
+    processor.process_payment(cash_payment)
